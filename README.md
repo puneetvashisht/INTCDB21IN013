@@ -10,3 +10,10 @@
         - Functional & Class syntax (pluging Simple extensions for React)
         - componentDidMount: lifecycle method invoked automatically as the component is mounted.. use it for initialization.
         - fetch() -- promise based method for AJAX
+    - Server side communication using fetch
+        - DELETE, POST
+        - POST: read values from textbox: React.createRef();
+    - Virtual DOM using Clock -- React peformance.
+    - Parent-Child communication using Dropdown .. pass function as props.
+
+
