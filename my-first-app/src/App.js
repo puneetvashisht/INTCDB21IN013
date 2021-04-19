@@ -8,6 +8,7 @@ import React, { Component } from 'react'
 import ViewEmployees from './components/ViewEmployees';
 import AddEmployee from './components/AddEmployee';
 import Clock from './components/Clock'
+import Dropdown from './components/Dropdown';
 
 export default class App extends Component {
 
@@ -44,9 +45,11 @@ export default class App extends Component {
           {/* {employeeList} */}
 
           {/* <Clock></Clock> */}
-          <AddEmployee></AddEmployee>
+
+          <Dropdown></Dropdown>
+          {/* <AddEmployee></AddEmployee>
           <hr></hr>
-          <ViewEmployees employees={this.state.employees}></ViewEmployees>
+          <ViewEmployees employees={this.state.employees}></ViewEmployees> */}
        </div>
       </div>
     )
