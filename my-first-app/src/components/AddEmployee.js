@@ -6,6 +6,7 @@ export default class AddEmployee extends Component {
         super();
         this.name = React.createRef();
         this.salary = React.createRef();
+        this.state = {message: ''}
     }
 
     addEmployee(event){
@@ -18,15 +19,34 @@ export default class AddEmployee extends Component {
         
         // invoke http post by using fetch
 
-        fetch('url', {
+        fetch('http://localhost:3004/employees/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name: this.name.current.value, salary: this.salary.current.value })
         })
+        .then(res=>{
+            console.log(res.status);
+            if(res.status === 201){
+                this.setState({message: "Successfully inserted"})
+            }
+        })
     }
 
     render() {
+
+
+        if(this.state.message){
+            var message = ( <div class="alert alert-success" role="alert">
+                {this.state.message}
+            </div>)
+        }
+
+
         return (
+
+            <>
+
+            {message}
             <div>
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1">Name</span>
@@ -40,6 +60,7 @@ export default class AddEmployee extends Component {
                 <button type="button" onClick={this.addEmployee.bind(this)} className="btn btn-primary">Add Employee</button>
      
             </div>
+            </>
         )
     }
 }

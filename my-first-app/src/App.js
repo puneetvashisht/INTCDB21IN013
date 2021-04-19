@@ -7,6 +7,7 @@ import './App.css';
 import React, { Component } from 'react'
 import ViewEmployees from './components/ViewEmployees';
 import AddEmployee from './components/AddEmployee';
+import Clock from './components/Clock'
 
 export default class App extends Component {
 
@@ -42,6 +43,7 @@ export default class App extends Component {
        <div className="row">
           {/* {employeeList} */}
 
+          {/* <Clock></Clock> */}
           <AddEmployee></AddEmployee>
           <hr></hr>
           <ViewEmployees employees={this.state.employees}></ViewEmployees>
