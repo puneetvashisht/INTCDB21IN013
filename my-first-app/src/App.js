@@ -1,16 +1,18 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import Badge from './Badge'
-import Card from './Card'
+// import Badge from './Badge'
+// import Card from './Card'
 
 
 import React, { Component } from 'react'
+import ViewEmployees from './components/ViewEmployees';
+import AddEmployee from './components/AddEmployee';
 
 export default class App extends Component {
 
   constructor(){
     super();
-    this.state = {employees: []}
+    this.state = {employees: [], message: ''}
   }
 
 
@@ -28,17 +30,21 @@ export default class App extends Component {
 
   render() {
 
-    let employeeList = this.state.employees.map((employee, i)=>{
-      return (
-          <Card name={employee.name}></Card>
-      );
-    })
+    // let employeeList = this.state.employees.map((employee, i)=>{
+    //   return (
+    //       <Card name={employee.name}></Card>
+    //   );
+    // })
 
 
     return (
-      <div class="container">
-       <div class="row">
-          {employeeList}
+      <div className="container">
+       <div className="row">
+          {/* {employeeList} */}
+
+          <AddEmployee></AddEmployee>
+          <hr></hr>
+          <ViewEmployees employees={this.state.employees}></ViewEmployees>
        </div>
       </div>
     )
@@ -49,8 +55,8 @@ export default class App extends Component {
 
 // function App() {
 //   return (
-//     <div class="container">
-//       <div class="row">
+//     <div className="container">
+//       <div className="row">
 
 //       <Card name="Ravi"></Card>
 //       <Card name="Priya"></Card>
