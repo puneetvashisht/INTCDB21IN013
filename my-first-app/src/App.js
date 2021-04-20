@@ -9,6 +9,7 @@ import ViewEmployees from './components/ViewEmployees';
 import AddEmployee from './components/AddEmployee';
 import Clock from './components/Clock'
 import Dropdown from './components/Dropdown';
+import Parent from './components/Parent'
 
 export default class App extends Component {
 
@@ -42,11 +43,12 @@ export default class App extends Component {
     return (
       <div className="container">
        <div className="row">
+         <Parent></Parent>
           {/* {employeeList} */}
 
           {/* <Clock></Clock> */}
 
-          <Dropdown></Dropdown>
+          {/* <Dropdown></Dropdown> */}
           {/* <AddEmployee></AddEmployee>
           <hr></hr>
           <ViewEmployees employees={this.state.employees}></ViewEmployees> */}
