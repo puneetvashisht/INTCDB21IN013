@@ -2,7 +2,9 @@
 import './App.css';
 import {Link, BrowserRouter as Router, Switch,
   Route} from 'react-router-dom'
-import ViewEmployee from './ViewEmployee';
+import ViewEmployees from './components/ViewEmployees';
+import AddEmployee from './components/AddEmployee';
+import UpdateEmployee from './components/UpdateEmployee';
 
 function App() {
   return (
@@ -11,17 +13,16 @@ function App() {
       <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">View Employees</Link>
+            </li>
+            <li>
+              <Link to="/add">Add Employee</Link>
             </li>
             <li>
               <Link to="/about">About</Link>
             </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-            <li>
-              <Link to="/employee">View Employee</Link>
-            </li>
+           
+           
           </ul>
         </nav>
 
@@ -29,14 +30,14 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/users">
-            <Users />
+          <Route path="/add">
+            <AddEmployee />
           </Route>
-          <Route path="/employee">
-            <ViewEmployee />
+          <Route path="/update/:id" component={UpdateEmployee}>
+            {/* <UpdateEmployee /> */}
           </Route>
           <Route path="/">
-            <Home />
+            <ViewEmployees />
           </Route>
         </Switch>
 
@@ -56,6 +57,4 @@ function About() {
   return <h2>About</h2>;
 }
 
-function Users() {
-  return <h2>Users</h2>;
-}
+

@@ -7,7 +7,7 @@
     },
     {
       "name": "Arun",
-      "salary": 34343.34,
+      "salary": "34343.34",
       "id": 18
     },
     {
@@ -24,6 +24,21 @@
       "name": "Rahul",
       "salary": "33333",
       "id": 21
+    },
+    {
+      "name": "Test5",
+      "salary": "43434",
+      "id": 22
+    },
+    {
+      "name": "Test6",
+      "salary": "45545",
+      "id": 23
+    },
+    {
+      "name": "Test7",
+      "salary": "88888",
+      "id": 24
     }
   ]
 }
