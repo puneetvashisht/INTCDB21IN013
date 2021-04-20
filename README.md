@@ -15,5 +15,10 @@
         - POST: read values from textbox: React.createRef();
     - Virtual DOM using Clock -- React peformance.
     - Parent-Child communication using Dropdown .. pass function as props.
+    - Single Page Application -- closer to mobile view.. just sending/recieving data.
+    - React-dom-router / any other library: https://reactrouter.com/
+    - Link, Routes, Switches -- Parameterized Route
+
+
 
 
