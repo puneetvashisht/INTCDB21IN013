@@ -5,6 +5,7 @@ import {Link, BrowserRouter as Router, Switch,
 import ViewEmployees from './components/ViewEmployees';
 import AddEmployee from './components/AddEmployee';
 import UpdateEmployee from './components/UpdateEmployee';
+import ValidationForm from './components/ValidationForm';
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
             <li>
               <Link to="/about">About</Link>
             </li>
+            <li>
+              <Link to="/validate">Validation Form</Link>
+            </li>
            
            
           </ul>
@@ -32,6 +36,9 @@ function App() {
           </Route>
           <Route path="/add">
             <AddEmployee />
+          </Route>
+          <Route path="/validate">
+            <ValidationForm />
           </Route>
           <Route path="/update/:id" component={UpdateEmployee}>
             {/* <UpdateEmployee /> */}
