@@ -7,7 +7,7 @@ import AddEmployee from './components/AddEmployee';
 import UpdateEmployee from './components/UpdateEmployee';
 import ValidationForm from './components/ValidationForm';
 
-function App() {
+function AppStart() {
   return (
     <Router>
     <div>
@@ -53,7 +53,7 @@ function App() {
   );
 }
 
-export default App;
+export default AppStart;
 
 
 function Home() {
