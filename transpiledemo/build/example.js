@@ -28,3 +28,6 @@ console.log(i)
 function sum(...x){
   x.forEach(value => console.log(value))
 }
+
+
+

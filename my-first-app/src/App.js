@@ -29,6 +29,10 @@ export default class App extends Component {
         this.setState({employees: data})
 
       });
+
+
+      // console.log('test')
+
   }
 
   render() {
