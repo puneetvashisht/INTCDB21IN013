@@ -1,9 +1,11 @@
 // import the express library
 const express = require('express');
+const cors = require('cors')
 const app = express();
 
 // Parse the request with express json parser
 app.use(express.json());
+app.use(cors());
 // const jsonParser = require('json-parser')
 
 // employees array
@@ -47,4 +49,4 @@ app.delete('/employees/:id', (req,res)=>{
 
 
 // Listening on the port
-app.listen(3000);
+app.listen(3004);
