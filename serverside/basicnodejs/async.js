@@ -8,7 +8,7 @@ function async(callback){
 
 console.log('start...')
 
-async(function(res){
+async((res) => {
     console.log(res)
 });
 
