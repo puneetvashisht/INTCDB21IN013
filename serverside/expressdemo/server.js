@@ -1,11 +1,33 @@
 // import the express library
 const express = require('express');
 const cors = require('cors')
+const colors = require('colors');
 const app = express();
 
 // Parse the request with express json parser
 app.use(express.json());
 app.use(cors());
+
+//static content is in public directory
+app.use(express.static('public'))
+
+// logging the req.url
+app.use(function (req, res, next) {
+    // res.status(404).send("Sorry can't find that!")
+    console.log('our first middleware...'.underline.red)
+    console.log( (req.method + ' : ' + req.url).green.bold);
+    next(); 
+})
+
+app.use(function (req, res, next) {
+    // res.status(404).send("Sorry can't find that!")
+    console.log('our second middleware')
+    next(); 
+})
+
+
+
+
 // const jsonParser = require('json-parser')
 
 // employees array
@@ -45,6 +67,11 @@ app.delete('/employees/:id', (req,res)=>{
     console.log(foundEmployee);
     res.json(foundEmployee);
 
+})
+
+// middleware functionality we can see.
+app.use(function (req, res, next) {
+    res.status(404).send("Sorry can't find that!")
 })
 
 
