@@ -1,6 +1,13 @@
 var express = require('express')
 var app = express()
 var router = express.Router()
+
+const todoRepo = require('../repos/todos')
+
+
+
+
+
 var todos =  [
     {text: 'Buy milk', done:true},
     {text: 'Jogging', done:true}
@@ -8,7 +15,11 @@ var todos =  [
 
 // Fetch the data -- Http GET
 router.get('/', (req,res)=>{
-    res.json(todos);
+    // res.json(todos);
+    todoRepo.fetchAllTodos(function(data){
+        res.json(data);
+    });
+    
 })
 
 // Fetch specific todo (using index)-- Http GET
@@ -25,8 +36,20 @@ router.get('/:index', (req,res)=>{
 // Send the data to server - Http POST
 router.post('/', (req,res)=>{
     console.log(req.body)
-    todos.push(req.body)
-    res.status(201).json(todos);
+    // Insert to db
+    // solution with callbacks
+    // todoRepo.insertTodo(req.body, function(){
+    //     res.status(201).json({"success": "true", "message": "Record successfully inserted"});
+    // });
+
+    // solution with promises
+    todoRepo.insertTodo(req.body)
+    .then((data)=> {
+        res.status(201).json(data);
+    })
+    .catch(err=> {
+        res.status(500).json(err);
+    })
 })
 
 // Delete data on server - Http DELETE
