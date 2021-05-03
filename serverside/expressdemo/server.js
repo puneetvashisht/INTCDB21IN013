@@ -12,12 +12,14 @@ app.use(cors());
 app.use(express.static('public'))
 
 // logging the req.url
-app.use(function (req, res, next) {
+var loggingMiddleware = function (req, res, next) {
     // res.status(404).send("Sorry can't find that!")
     console.log('our first middleware...'.underline.red)
     console.log( (req.method + ' : ' + req.url).green.bold);
     next(); 
-})
+}
+
+// app.use(loggingMiddleware);
 
 app.use(function (req, res, next) {
     // res.status(404).send("Sorry can't find that!")
@@ -36,7 +38,9 @@ let employees = [
     {id: 2, name:"Priya", salary: 24343.34}
 ]
 
-app.get('/hello', function(req,res){
+// app.get("/test", )
+
+app.get('/hello', loggingMiddleware, function(req,res){
     res.json({message: "Hello world from express!!"})
 })
 
