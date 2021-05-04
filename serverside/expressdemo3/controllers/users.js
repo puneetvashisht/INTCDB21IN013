@@ -13,6 +13,22 @@ router.post('/', (req,res)=>{
     })
 })
 
+router.post('/authenticate', (req,res)=>{
+    // logic to validate paasword
+    // find User by name
+    userRepo.findUserByName(req.body.name, function(data){
+        console.log(data)
+        if(req.body.password == data.password){
+            res.json({auth: true})
+        }
+        else{
+            res.json({auth: false})
+        }
+    })
+    // if user found, compare password
+    // if passwords are same, return success, else failure
+})
+
 router.get('/', (req,res)=>{
     userRepo.findAllUsers((data)=>{
         res.json(data);

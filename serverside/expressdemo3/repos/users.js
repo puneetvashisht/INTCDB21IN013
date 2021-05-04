@@ -28,6 +28,21 @@ function insertUser(user){
     })   
 }
 
+function findUserByName(name, fn){
+
+  client.connect(function(err) {
+    console.log('Connected successfully to server');
+    const db = client.db(dbName);
+    const collection = db.collection('users');
+
+    collection.findOne({name}, (err, docs)=> {
+      console.log(docs);
+      fn(docs);
+    })
+  })
+}
+
+
 function findAllUsers(fn){
     client.connect(function(err) {
         console.log('Connected successfully to server');
@@ -67,4 +82,4 @@ function deleleUser(name){
 }
 
 // module.exports = {insertUser:insertUser, findAllUsers:findAllUsers}
-module.exports = {insertUser, findAllUsers, deleleUser}
+module.exports = {insertUser, findAllUsers, deleleUser, findUserByName}
