@@ -17,6 +17,20 @@ export default class Profile extends Component {
     }
     
 
+    deleteUser(name){
+
+        fetch('http://localhost:8080/users/'+ name, {
+            method: 'DELETE'
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            // this.props.history.push("/profile");
+            // this.setState({users: data})
+        })
+
+    }
+
     render() {
 
        let usersList =  this.state.users.map((user, i)=>{
@@ -25,6 +39,7 @@ export default class Profile extends Component {
                     <li className="list-group-item">{user.name}</li>
                     <li className="list-group-item">{user.email}</li>
                     <li className="list-group-item">{user.password}</li>
+                    <li className="list-group-item"><button className="btn btn-danger" onClick={this.deleteUser.bind(this, user.name)}> X </button></li>
                 </ul>
             )
         })
