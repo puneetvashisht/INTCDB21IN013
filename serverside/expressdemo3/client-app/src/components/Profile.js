@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 export default class Profile extends Component {
 
@@ -8,11 +9,18 @@ export default class Profile extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:8080/users')
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data);
-            this.setState({users: data})
+        // fetch('http://localhost:8080/users')
+        // .then(res=>res.json())
+        // .then(data=>{
+        //     console.log(data);
+        //     this.setState({users: data})
+        // })
+
+        axios.get('http://localhost:8080/users')
+        // .then(res=>res.json())
+        .then(res=>{
+            console.log(res);
+            this.setState({users: res.data})
         })
     }
     
