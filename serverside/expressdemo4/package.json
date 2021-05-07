@@ -1,17 +1,17 @@
 {
-  "name": "expressdemo3",
+  "name": "expressdemo4",
   "version": "1.0.0",
-  "description": "Steps to start db     - create a directory <dbdata>     - make sure mongo bin directory in in PATH      - mongod --dbpath <dbdata>",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongodb": "^3.6.6",
     "mongoose": "^5.12.7"
   }
 }
