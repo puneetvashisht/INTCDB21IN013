@@ -49,7 +49,7 @@ export default class ViewEmployees extends Component {
             <>
             
             {message}
-
+            
             <table className="table">
                 <thead>
                     <tr>
