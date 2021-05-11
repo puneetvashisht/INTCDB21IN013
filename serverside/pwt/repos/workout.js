@@ -25,8 +25,8 @@ function insertWorkout(workout, fn){
     workoutObj.desc = workout.desc
     workoutObj.cbpm = workout.cbpm
     workoutObj.save((err)=>{
-        if(err) throw err;
-        fn();
+        // if(err) throw err;
+        fn(err);
     })
 }
 

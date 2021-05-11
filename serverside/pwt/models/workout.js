@@ -6,8 +6,11 @@ const mongoose = require('mongoose');
 // 2. Create a schema
 const Schema = mongoose.Schema;
 const WorkoutSchema = new Schema({
+//   _id: Schema.ObjectId,
   title: {
     type: String,
+    minLength: 5,
+    unique: true,
     required: [true, 'Provide a title.. It is mandatory']
   },
   desc: {
