@@ -1,5 +1,14 @@
 
 // async simply wraps a non-promise return into a promse
+
+async function xyz(){
+    return 1;
+    await promise;
+}
+xyz()
+// console.log(res)
+.then(res=>console.log(res))
+
 async function test(){
     let promise = new Promise((resolve, reject)=>{
         setTimeout(function(){
