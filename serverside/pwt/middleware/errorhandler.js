@@ -1,6 +1,6 @@
 function errorHandler (err, req, res, next) {
-    console.log('Error handler invoked.....')
-    console.log(err.message);
+    console.log('Error handler invoked.....'.red.bold)
+    console.log(err.message.red);
     // if (res.headersSent) {
     //   return next(err)
     // }

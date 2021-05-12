@@ -1,21 +1,9 @@
 // DB operations
 
-// Mongoose
-const mongoose = require('mongoose');
+
 const Workout = require('../models/workout')
 
-// 4.Connection to db
 console.log('attempting to connect')
-
-// 4. Create connection
-  mongoose.connect('mongodb://localhost:27017/ctsdb', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true
-  });
-
-
 
 function insertWorkout(workout, fn){
     console.log('db code in invoked')

@@ -1,8 +1,11 @@
 const express = require('express');
 const app = express();
 const cors = require('cors')
+require('colors');
+require('dotenv').config()
 const workoutRoutes = require('./routes/workout')
 const errorHandler = require('./middleware/errorhandler')
+const connectToDatabase = require('./db.js')
 
 
 app.use(cors())
@@ -10,9 +13,10 @@ app.use(cors())
 //parse the incoming http request to json
 app.use(express.json())
 
+connectToDatabase();
 
 // route for workout
-app.use('/workouts', workoutRoutes);
+app.use('/api/v1/workouts', workoutRoutes);
 
 app.get('/test', function (req, res) {
     throw new Error('BROKEN') // Express will catch this on its own.
@@ -21,4 +25,4 @@ app.get('/test', function (req, res) {
 
 app.use(errorHandler);
 
-app.listen(8080, ()=> console.log('listening on port 8080'))
+app.listen(process.env.APP_PORT, ()=> console.log(`listening on port ${process.env.APP_PORT}`))
