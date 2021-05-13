@@ -52,4 +52,12 @@ const addWorkouts = async(req,res,next) => {
         // })
 }
 
-module.exports = {fetchAllWorkouts,addWorkouts}
+
+const startWorkout = async(req,res,next) => {
+    Workout.findOneAndUpdate({title: req.params.title}, {startTime: new Date()}, (err, doc)=>{
+        if(err) next(err);
+        res.json({success:true});
+    })
+}
+
+module.exports = {fetchAllWorkouts,addWorkouts, startWorkout}

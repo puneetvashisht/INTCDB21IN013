@@ -23,6 +23,12 @@ const WorkoutSchema = new Schema({
    createdAt: {
        type: Date,
        default: Date.now
+   },
+   startTime: {
+       type: Date
+   },
+   endTime: {
+       type: Date
    }
 });
 

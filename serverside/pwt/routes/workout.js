@@ -4,12 +4,15 @@ var express = require('express')
 var app = express()
 var router = express.Router()
 
-const {fetchAllWorkouts,addWorkouts} = require('../controllers/workout')
+const {fetchAllWorkouts,addWorkouts, startWorkout} = require('../controllers/workout')
 
 
 router.route('/')
 .get(fetchAllWorkouts)
 .post(addWorkouts)
+
+router.route('/start/:title')
+.patch(startWorkout)
 
 // // Fetch the data -- Http GET
 // router.get('/', workoutController.fetchAllWorkouts)
