@@ -2,36 +2,38 @@
 
 
 const Workout = require('../models/workout')
+const asyncHandler = require('../middleware/async');
 // const workoutRepo = require('../repos/workout')
 
-const fetchAllWorkouts = async(req,res, next) => {
+const fetchAllWorkouts = asyncHandler(async(req,res, next) => {
 
-    try{
+    // try{
         let workouts = await Workout.find();
         res.json(workouts);
-    }
-    catch(err){
-        next(err);
-    }
+    // }
+    // catch(err){
+    //     next(err);
+    // }
     
     
     // workoutRepo.findAllWorkouts((data)=>{
     //     res.json(data);
     // })
         
-}
+})
 
-const addWorkouts = async(req,res,next) => {
+const addWorkouts = asyncHandler(async(req,res,next) => {
 
-    try{
+    // try{
         let workoutRes = await Workout.create(req.body);
         console.log(workoutRes);
         res.status(201).json({success: true})
-    }
-    catch(err){
-        console.log(err);
-        next(err);
-    }
+    // }
+    // catch(next)
+    // catch(err){
+    //     console.log(err);
+    //     next(err);
+    // }
     
 
       //repos ... 
@@ -50,14 +52,36 @@ const addWorkouts = async(req,res,next) => {
         //     res.status(201).json({success: true})
             
         // })
-}
+})
 
 
-const startWorkout = async(req,res,next) => {
-    Workout.findOneAndUpdate({title: req.params.title}, {startTime: new Date()}, (err, doc)=>{
-        if(err) next(err);
-        res.json({success:true});
+const startWorkout = asyncHandler(async(req,res,next) => {
+
+    let workout = await Workout.findOneAndUpdate({title: req.params.title}, {startTime: new Date()},{
+        new: true,
+        runValidators: true
     })
-}
+    console.log(workout)
+    if(!workout) throw new Error(`Could not find workout with title ${req.params.title}`)
+    res.json({success:true, data: workout});
+    
+    // Workout.findOneAndUpdate({title: req.params.title}, {startTime: new Date()}, (err, doc)=>{
+    //     if(err) next(err);
+    //     res.json({success:true});
+    // })
 
-module.exports = {fetchAllWorkouts,addWorkouts, startWorkout}
+})
+
+const endWorkout = asyncHandler(async(req,res,next) => {
+
+    let workout = await Workout.findOneAndUpdate({title: req.params.title}, {endTime: new Date()},{
+        new: true,
+        runValidators: true
+    })
+    console.log(workout)
+    if(!workout) throw new Error(`Could not find workout with title ${req.params.title}`)
+    res.json({success:true, data: workout});
+    
+})
+
+module.exports = {fetchAllWorkouts,addWorkouts, startWorkout, endWorkout}
