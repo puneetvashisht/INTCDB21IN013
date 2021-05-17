@@ -4,6 +4,7 @@ const cors = require('cors')
 require('colors');
 require('dotenv').config()
 const workoutRoutes = require('./routes/workout')
+const userRoutes = require('./routes/user')
 const errorHandler = require('./middleware/errorhandler')
 const connectToDatabase = require('./db.js')
 
@@ -17,6 +18,9 @@ connectToDatabase();
 
 // route for workout
 app.use('/api/v1/workouts', workoutRoutes);
+// route for users
+app.use('/api/v1/users', userRoutes);
+
 
 app.get('/test', function (req, res) {
     throw new Error('BROKEN') // Express will catch this on its own.

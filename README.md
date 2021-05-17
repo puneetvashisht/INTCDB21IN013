@@ -22,5 +22,18 @@
     - Link, Routes, Switches -- Parameterized Route
 
 
+    Node
+        JS Core Libraries: FS, Http
+        Extension libraries through NPM (eg. express, mongodb, mongoose, colors, cors....)
+        Asynchronous methods by default.. (callbacks, promises, async/await)
+
+    ExpressJS
+        Routes
+        Error handlers (to handle negative cases/scenarios)
+        Controllers (Handling http stuff, dealing with request/response)
+        Routes (Configuration of Http methods and routes available)
+        Repos (DB Access... (optional))
+
+
 
 
