@@ -14,4 +14,7 @@ const fetchAllUsers = asyncHandler(async(req,res,next) => {
     res.json({success:true, data: users})
 })
 
+
+
+
 module.exports = {addUser, fetchAllUsers}

@@ -84,4 +84,9 @@ const endWorkout = asyncHandler(async(req,res,next) => {
     
 })
 
-module.exports = {fetchAllWorkouts,addWorkouts, startWorkout, endWorkout}
+const fetchWorkoutsByUser = asyncHandler(async(req,res,next) => {
+    let workouts = await Workout.find({user: req.params.userid});
+    res.json({success:true, data: workouts})
+})
+
+module.exports = {fetchAllWorkouts,addWorkouts, startWorkout, endWorkout, fetchWorkoutsByUser}
