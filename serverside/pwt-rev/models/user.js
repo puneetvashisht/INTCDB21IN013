@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const JSON_SECRET_KEY="ctsINtraining$"
 
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
@@ -28,7 +27,7 @@ const UserSchema = new Schema({
 
 UserSchema.methods.generateToken = async function(){
     console.log('Generating token ***')
-    let token = await jwt.sign({id: this._id}, JSON_SECRET_KEY);
+    let token = await jwt.sign({id: this._id}, process.env.JSON_SECRET_KEY, { expiresIn: '1h' });
     // console.log(token);
     return token;
 }

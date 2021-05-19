@@ -10,7 +10,8 @@ const fetchAllUsers = asyncHandler(async(req, res)=>{
 
 const registerUser = asyncHandler(async(req, res)=>{
     let user = await User.create(req.body);
-    res.status(201).json({success:true, data:user})
+    const token = await user.generateToken();
+    res.status(201).json({success:true, token})
 })
 
 const loginUser = asyncHandler(async(req, res)=>{
