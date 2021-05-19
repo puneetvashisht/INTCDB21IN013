@@ -1,5 +1,6 @@
 const User = require('../models/User');
 
+
 const asyncHandler = require('../middleware/async')
 
 const fetchAllUsers = asyncHandler(async(req, res)=>{
@@ -24,7 +25,16 @@ const loginUser = asyncHandler(async(req, res)=>{
     if(!isMatch) throw new Error('Invalid username/password!!')
 
     console.log(user);
-    res.json({success:true, data:user})
+
+
+    const token = await user.generateToken();
+    // console.log(token);
+    // var token = jwt.sign({ id: user._id, email: user.email }, 'shhhhh');
+
+    // token instead of user
+    // res.json({success:true, data:user})
+    res.json({success:true, token})
+
 })
 
 module.exports = {fetchAllUsers, registerUser, loginUser}

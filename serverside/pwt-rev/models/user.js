@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const JSON_SECRET_KEY="ctsINtraining$"
 
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
@@ -22,6 +25,13 @@ const UserSchema = new Schema({
         default: Date.now
     }
 });
+
+UserSchema.methods.generateToken = async function(){
+    console.log('Generating token ***')
+    let token = await jwt.sign({id: this._id}, JSON_SECRET_KEY);
+    // console.log(token);
+    return token;
+}
 
 UserSchema.methods.matchPassword = async function(enteredPassword){
     console.log('Inside match password ***')
