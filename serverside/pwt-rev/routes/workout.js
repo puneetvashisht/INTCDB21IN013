@@ -3,19 +3,19 @@
 var express = require('express')
 var app = express()
 var router = express.Router()
-const {protect} = require('../middleware/auth');
+const {protect, authorize} = require('../middleware/auth');
 const {fetchAllWorkouts,addWorkouts, startWorkout, endWorkout, fetchWorkoutsByUser} = require('../controllers/workout')
 
 
 router.route('/')
 .get(protect, fetchAllWorkouts)
-.post(protect,addWorkouts)
+.post(protect, authorize('trainer', 'admin') ,addWorkouts)
 
 router.route('/start/:title')
-.patch(protect, startWorkout)
+.patch(protect, authorize('user'), startWorkout)
 
 router.route('/end/:title')
-.patch(protect, endWorkout)
+.patch(protect, authorize('user'), endWorkout)
 
 router.route('/:userid')
 .get(protect, fetchWorkoutsByUser)

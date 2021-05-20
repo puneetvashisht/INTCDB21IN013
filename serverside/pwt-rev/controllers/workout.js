@@ -9,13 +9,7 @@ const fetchAllWorkouts = asyncHandler(async(req,res, next) => {
 
     // try{
         let workouts = await Workout.find();
-        res.json(workouts);
-    // }
-    // catch(err){
-    //     next(err);
-    // }
-    
-    
+        res.json({success:true, data:workouts});
     // workoutRepo.findAllWorkouts((data)=>{
     //     res.json(data);
     // })

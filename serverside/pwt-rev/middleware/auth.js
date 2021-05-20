@@ -20,4 +20,19 @@ const protect =  asyncHandler(async (req, res, next)=> {
 
 })
 
-module.exports = {protect};
+const authorize = (...roles) => {
+    return (req, res, next)=> {
+        console.log("Allowed roles: " +roles)
+        console.log('User role: ' + req.user.role)
+        // if(roles && roles.includes(req.user.role))
+        if(roles.includes(req.user.role)){
+            next();
+        }
+        else{
+            res.sendStatus(403);
+        }
+        
+    }
+}
+
+module.exports = {protect, authorize};

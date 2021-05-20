@@ -19,6 +19,11 @@ const UserSchema = new Schema({
         type: String,
         minLength: 6
     },
+    role: {
+        type: String,
+        enum: ['user', 'trainer', 'admin'],
+        default: 'user'
+    },
     createdAt: {
         type: Date,
         default: Date.now
@@ -27,7 +32,7 @@ const UserSchema = new Schema({
 
 UserSchema.methods.generateToken = async function(){
     console.log('Generating token ***')
-    let token = await jwt.sign({id: this._id}, process.env.JSON_SECRET_KEY, { expiresIn: '1h' });
+    let token = await jwt.sign({id: this._id, role: this.role}, process.env.JSON_SECRET_KEY, { expiresIn: '1h' });
     // console.log(token);
     return token;
 }
