@@ -1,8 +1,10 @@
 
 import React, { useState } from 'react'
+import AuthService from '../services/auth';
+import { useHistory } from "react-router-dom";
 
 function Register(){
-
+    let history = useHistory();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -12,22 +14,10 @@ function Register(){
         let user = {name, email, password}
         console.log(user)
     
-       fetch('http://localhost:8080/api/v1/users', {
-           headers: {
-               'content-type': 'application/json',
-           },
-           method: 'POST',
-           body: JSON.stringify(user)
-       })
-       .then(res=>res.json())
-       .then(data=>{
-           console.log(data);
-           if(data.success){
-               localStorage.setItem('token', data.token);
-               // show an alert message or transition into dashboard component
-
-           }
-       })
+        AuthService.register(user)
+        .then(()=>history.push("/dashboard"))
+        .catch(err=> console.log(err));
+       
     }
     const onNameChange = (event) => {
         setName(event.target.value);

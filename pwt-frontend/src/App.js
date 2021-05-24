@@ -5,8 +5,10 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import AuthService from './services/auth'
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -31,6 +33,7 @@ export default function BasicExample() {
           <li>
             <Link to="/dashboard">Dashboard</Link>
           </li>
+          <li><a href="#" onClick={()=>AuthService.logout()}>Logout</a></li>
         </ul>
 
         <hr />
@@ -55,29 +58,6 @@ export default function BasicExample() {
   );
 }
 
-// You can think of these components as "pages"
-// in your app.
 
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
-  );
-}
 
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-    </div>
-  );
-}
 
-function Dashboard() {
-  return (
-    <div>
-      <h2>Dashboard</h2>
-    </div>
-  );
-}
