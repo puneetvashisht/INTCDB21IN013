@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+import AddWorkout from "./components/AddWorkout";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -20,22 +21,35 @@ import AuthService from './services/auth'
 // work properly.
 
 export default function BasicExample() {
+
+
+  const [authenticated, setAuthenticated] = useState(false);
+  // const [message, setMessage] = useState('');
+
+  // initialization 
+  useEffect(() => {
+    setAuthenticated(AuthService.isAuthenticated())
+  }, [])
+
+  let nav = authenticated ? (<ul>
+    <li>
+      <Link to="/addworkout">Add Workout</Link>
+    </li>
+    <li>
+      <Link to="/dashboard">Dashboard</Link>
+    </li>
+    <li><a href="#" onClick={() => AuthService.logout()}>Logout</a></li>
+  </ul>) : (<ul><li>
+    <Link to="/">Login</Link>
+  </li>
+    <li>
+      <Link to="/register">Sign Up</Link>
+    </li></ul>);
+
   return (
     <Router>
       <div>
-        <ul>
-          <li>
-            <Link to="/">Login</Link>
-          </li>
-          <li>
-            <Link to="/register">Sign Up</Link>
-          </li>
-          <li>
-            <Link to="/dashboard">Dashboard</Link>
-          </li>
-          <li><a href="#" onClick={()=>AuthService.logout()}>Logout</a></li>
-        </ul>
-
+        {nav}
         <hr />
 
         {/*
@@ -48,7 +62,9 @@ export default function BasicExample() {
         <Switch>
           <Route exact path="/" component={Login}>
           </Route>
-          <Route path="/register"  component={Register}>
+          <Route path="/register" component={Register}>
+          </Route>
+          <Route path="/addworkout" component={AddWorkout}>
           </Route>
           <Route path="/dashboard" component={Dashboard}>
           </Route>

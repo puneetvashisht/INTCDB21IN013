@@ -1,3 +1,4 @@
+import jwt from 'jwt-decode'
 
 const API_URL = 'http://localhost:8080/api/v1/users/';
 
@@ -50,4 +51,19 @@ const register = (user) => {
        })
 }
 
-export default {login, register, logout};
+const isAuthenticated = () => {
+    const token = localStorage.getItem('token');
+    
+    if(token){
+        // Decoding logic (token)
+
+        // let decodedToken =  jwt(token);
+        // if(user.role);
+        // console.log(decodedToken.role === 'ADMIN');
+        return true;
+    }
+    return false;
+
+}
+
+export default {login, register, logout, isAuthenticated};

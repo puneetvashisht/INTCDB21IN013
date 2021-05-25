@@ -17,6 +17,7 @@ function Login(){
        .then(()=> {
            console.log('in Login component.......')
            history.push("/dashboard");
+           window.location.reload();
        })
        .catch(err => {
            console.log('In login catch .......')
