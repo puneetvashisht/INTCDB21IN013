@@ -24,41 +24,61 @@ export default function BasicExample() {
 
 
   const [authenticated, setAuthenticated] = useState(false);
+  const [showAdmin, setShowAdmin] = useState(false);
   // const [message, setMessage] = useState('');
 
   // initialization 
   useEffect(() => {
     setAuthenticated(AuthService.isAuthenticated())
-  }, [])
+    setShowAdmin(AuthService.isAdmin())
+    console.log('Admin role: ', showAdmin)
+;  }, [])
 
-  let nav = authenticated ? (<ul>
-    <li>
-      <Link to="/addworkout">Add Workout</Link>
-    </li>
-    <li>
-      <Link to="/dashboard">Dashboard</Link>
-    </li>
-    <li><a href="#" onClick={() => AuthService.logout()}>Logout</a></li>
-  </ul>) : (<ul><li>
-    <Link to="/">Login</Link>
-  </li>
-    <li>
-      <Link to="/register">Sign Up</Link>
-    </li></ul>);
+  // let nav = authenticated ? (<ul>
+  //   <li>
+  //     <Link to="/addworkout">Add Workout</Link>
+  //   </li>
+  //   <li>
+  //     <Link to="/dashboard">Dashboard</Link>
+  //   </li>
+  //   <li><a href="#" onClick={() => AuthService.logout()}>Logout</a></li>
+  // </ul>) : (<ul><li>
+  //   <Link to="/">Login</Link>
+  // </li>
+  //   <li>
+  //     <Link to="/register">Sign Up</Link>
+  //   </li></ul>);
+
+  console.log('render again..', showAdmin)
 
   return (
+   
     <Router>
       <div>
-        {nav}
+        
+
+        <ul>
+        {showAdmin && <li>
+          <Link to="/addworkout">Add Workout</Link>
+        </li>}
+        {authenticated && <li>
+      < Link to="/dashboard">Dashboard</Link>
+        </li>}
+        {authenticated && <li><a href="#" onClick={() => AuthService.logout()}>Logout</a></li>}
+
+        {!authenticated && <><li>
+          <Link to="/">Login</Link>
+        </li>
+        <li>
+          <Link to="/register">Sign Up</Link>
+        </li></>}
+
+        </ul>
+        
+        
         <hr />
 
-        {/*
-          A <Switch> looks through all its children <Route>
-          elements and renders the first one whose path
-          matches the current URL. Use a <Switch> any time
-          you have multiple routes, but you want only one
-          of them to render at a time
-        */}
+       
         <Switch>
           <Route exact path="/" component={Login}>
           </Route>

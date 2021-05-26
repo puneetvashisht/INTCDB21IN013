@@ -55,15 +55,31 @@ const isAuthenticated = () => {
     const token = localStorage.getItem('token');
     
     if(token){
-        // Decoding logic (token)
-
-        // let decodedToken =  jwt(token);
-        // if(user.role);
-        // console.log(decodedToken.role === 'ADMIN');
         return true;
     }
     return false;
 
 }
 
-export default {login, register, logout, isAuthenticated};
+
+const isAdmin = () => {
+    const token = localStorage.getItem('token');
+    
+    if(token){
+        // Decoding logic (token)
+
+        let decodedToken =  jwt(token);
+        console.log(decodedToken)
+        console.log(decodedToken.role === 'admin');
+        if(decodedToken.role === 'admin'){
+            return true;
+        }      
+        else{
+            return false;
+        }
+    }
+    return false;
+
+}
+
+export default {login, register, logout, isAuthenticated, isAdmin};

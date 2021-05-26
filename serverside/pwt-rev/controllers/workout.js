@@ -18,6 +18,7 @@ const fetchAllWorkouts = asyncHandler(async(req,res, next) => {
 
 const addWorkouts = asyncHandler(async(req,res,next) => {
 
+
     // try{
         let workoutRes = await Workout.create(req.body);
         console.log(workoutRes);
