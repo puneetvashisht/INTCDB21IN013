@@ -5,10 +5,11 @@ var app = express()
 var router = express.Router()
 const {protect, authorize} = require('../middleware/auth');
 const {fetchAllWorkouts,addWorkouts, startWorkout, endWorkout, fetchWorkoutsByUser} = require('../controllers/workout')
-
+const Workout = require('../models/workout')
+const advancedFind = require('../middleware/advancedFind');
 
 router.route('/')
-.get(protect, fetchAllWorkouts)
+.get(protect, advancedFind(Workout),  fetchAllWorkouts)
 .post(protect, authorize('trainer', 'admin') ,addWorkouts)
 
 router.route('/start/:title')

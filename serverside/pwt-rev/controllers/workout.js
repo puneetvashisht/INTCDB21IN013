@@ -7,9 +7,10 @@ const asyncHandler = require('../middleware/async');
 
 const fetchAllWorkouts = asyncHandler(async(req,res, next) => {
 
+    res.json(res.advancedResults);
     // try{
-        let workouts = await Workout.find();
-        res.json({success:true, data:workouts});
+        // let workouts = await Workout.find();
+        // res.json({success:true, data:workouts});
     // workoutRepo.findAllWorkouts((data)=>{
     //     res.json(data);
     // })

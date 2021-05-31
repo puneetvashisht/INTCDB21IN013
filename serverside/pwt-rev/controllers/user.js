@@ -1,23 +1,61 @@
-const User = require('../models/User');
-
-
+const User = require('../models/user');
 const asyncHandler = require('../middleware/async')
 
-//Generic Method (Select, Sort, Limit)
+// //Generic Method (Select, Sort, Limit)
+// const fetchAllUsers = asyncHandler(async(req, res)=>{
+
+//     console.log(req.query.select)
+//     console.log(req.query.sort)
+//     if(req.query.select){
+//         let users = await User.find().select(req.query.select); 
+//         res.json({success:true, data:users})
+//     }
+//     if(req.query.sort){
+//         let users = await User.find().sort(req.query.sort); 
+//         res.json({success:true, data:users})
+//     }
+//     // let users = await User.find();
+//     // res.json({success:true, data:users})
+// })
+
 const fetchAllUsers = asyncHandler(async(req, res)=>{
-    console.log(req.query.select)
-    console.log(req.query.sort)
-    if(req.query.select){
-        let users = await User.find().select(req.query.select); 
-        res.json({success:true, data:users})
-    }
-    if(req.query.sort){
-        let users = await User.find().sort(req.query.sort); 
-        res.json({success:true, data:users})
-    }
-    // let users = await User.find();
-    // res.json({success:true, data:users})
+    res.status(200).json(res.advancedResults);
 })
+
+    // const reqQuery = {...req.query};
+    // console.log('Req Query object: ', reqQuery)
+   
+    // //Logic to remove field & delete from reqQuery
+    // const removeFields = ['select', 'sort'];
+    // removeFields.forEach(param=> delete reqQuery[param])
+
+    // console.log('Req query object after deletion: ', reqQuery);
+
+    // let queryStr = JSON.stringify(reqQuery);
+
+    // let query = User.find(JSON.parse(queryStr))
+    
+
+    // // Select fields name,email => name email
+    // if(req.query.select){
+    //     const fields = req.query.select.split(',').join(' ');
+    //     console.log(fields);
+    //     query = query.select(fields)
+    // }
+    // // Sort fields
+    // if(req.query.sort){
+    //     const sortBy = req.query.sort.split(',').join(' ');
+    //     console.log(sortBy);
+    //     query = query.sort(sortBy)
+    // }
+    // else{
+    //     query= query.sort('-createdAt')
+    // }
+
+    // const users = await query;
+
+    // res.json({success:true, data:users})
+
 
 // const fetchAllUsersSortedByName = asyncHandler(async(req, res)=>{
 //     let users = await User.find().sort('name');
