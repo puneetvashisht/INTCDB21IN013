@@ -3,10 +3,31 @@ const User = require('../models/User');
 
 const asyncHandler = require('../middleware/async')
 
+//Generic Method (Select, Sort, Limit)
 const fetchAllUsers = asyncHandler(async(req, res)=>{
-    let users = await User.find();
-    res.json({success:true, data:users})
+    console.log(req.query.select)
+    console.log(req.query.sort)
+    if(req.query.select){
+        let users = await User.find().select(req.query.select); 
+        res.json({success:true, data:users})
+    }
+    if(req.query.sort){
+        let users = await User.find().sort(req.query.sort); 
+        res.json({success:true, data:users})
+    }
+    // let users = await User.find();
+    // res.json({success:true, data:users})
 })
+
+// const fetchAllUsersSortedByName = asyncHandler(async(req, res)=>{
+//     let users = await User.find().sort('name');
+//     res.json({success:true, data:users})
+// })
+
+// const fetchAllUsersByNameAndEmail = asyncHandler(async(req, res)=>{
+//     let users = await User.find().select('name email');
+//     res.json({success:true, data:users})
+// })
 
 const registerUser = asyncHandler(async(req, res)=>{
     let user = await User.create(req.body);
