@@ -3,6 +3,8 @@
 
 const advancedFind = (model) =>  async (req, res, next)=> {
 
+    
+    // Cloning the re
     const reqQuery = {...req.query};
     console.log('Req Query object: ', reqQuery)
    
@@ -14,7 +16,17 @@ const advancedFind = (model) =>  async (req, res, next)=> {
 
     let queryStr = JSON.stringify(reqQuery);
 
+    // Advanced find filtering
+    // queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match=> `$${match}`)
+
+
+    console.log('After gte ', queryStr);
+
+    // model.find({ sort: '-name', select: 'name,email' })
+    // model.find({name:"admin21"}).select('name email').sort('-name')
+
     let query = model.find(JSON.parse(queryStr))
+    // let query = model.find({name:'admin21'})
     
 
     // Select fields name,email => name email

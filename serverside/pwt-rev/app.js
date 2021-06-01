@@ -4,6 +4,7 @@ require('dotenv').config()
 require('colors')
 const userRoutes = require('./routes/user')
 const workoutRoutes = require('./routes/workout')
+const weightLogRoutes = require('./routes/weightlog')
 const connectToDatabase = require('./db')
 const errorHandler = require('./middleware/errorhandler');
 const cors = require('cors');
@@ -15,6 +16,7 @@ app.use(cors());
 
 app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/workouts', workoutRoutes)
+app.use('/api/v1/weightlog', weightLogRoutes)
 
 app.use(errorHandler);
 

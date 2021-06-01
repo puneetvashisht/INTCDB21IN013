@@ -14,7 +14,11 @@ const User = require('../models/user');
 // router.get('/', fetchAllUsers)
 router.route('/')
 .get(advancedFind(User) ,fetchAllUsers)
+// .get(fetchNameAndEmail)
+// .get(fetchUsersSortByName)
+// .get(fetchUsersByName)
 .post(registerUser);
+
 
 
 router.route('/login')
