@@ -5,11 +5,16 @@ import {
   Route,
   Link
 } from "react-router-dom";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Navbar, Nav, NavDropdown, FormControl, Form, Button } from 'react-bootstrap'
+
 import AddWorkout from "./components/AddWorkout";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import AuthService from './services/auth'
+import WorkoutOperations from "./components/WorkoutOperations";
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -52,45 +57,91 @@ export default function BasicExample() {
   console.log('render again..', showAdmin)
 
   return (
-   
+
     <Router>
-      <div>
+
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand href="#home">PWT App</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            {authenticated &&<Nav.Link href="#home"><Link to="/dashboard">Dashboard</Link></Nav.Link>}
+            {authenticated &&<Nav.Link href="#home"><a href="#" onClick={()=>AuthService.logout()}>Logout</a></Nav.Link>}
+            {showAdmin && <Nav.Link href="#link"><Link to="/addworkout">Add Workout</Link></Nav.Link>}
+            
+            {!authenticated && 
+              <>
+              <Nav.Link href="#link"><Link to="/">Login</Link></Nav.Link>
+              <Nav.Link href="#link"><Link to="/register">Register</Link></Nav.Link>
+              </>
+            }
+            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+       
+        </Navbar.Collapse>
+      </Navbar>
+
+      <Switch>
+        <Route exact path="/" component={Login}>  
+        </Route>
+        <Route path="/register" component={Register}>
+        </Route>
+        <Route path="/addworkout" component={AddWorkout}>
+        </Route>
+        <Route path="/dashboard" component={Dashboard}>
+        </Route>
+        <Route path="/operations/:title" component={WorkoutOperations}>
+        </Route>
+
+      </Switch>
+
+ 
+    </Router>
+   
+    // <Router>
+    //   <div>
         
 
-        <ul>
-        {showAdmin && <li>
-          <Link to="/addworkout">Add Workout</Link>
-        </li>}
-        {authenticated && <li>
-      < Link to="/dashboard">Dashboard</Link>
-        </li>}
-        {authenticated && <li><a href="#" onClick={() => AuthService.logout()}>Logout</a></li>}
+    //     <ul>
+    //     {showAdmin && <li>
+    //       <Link to="/addworkout">Add Workout</Link>
+    //     </li>}
+    //     {authenticated && <li>
+    //   < Link to="/dashboard">Dashboard</Link>
+    //     </li>}
+    //     {authenticated && <li><a href="#" onClick={() => AuthService.logout()}>Logout</a></li>}
 
-        {!authenticated && <><li>
-          <Link to="/">Login</Link>
-        </li>
-        <li>
-          <Link to="/register">Sign Up</Link>
-        </li></>}
+    //     {!authenticated && <><li>
+    //       <Link to="/">Login</Link>
+    //     </li>
+    //     <li>
+    //       <Link to="/register">Sign Up</Link>
+    //     </li></>}
 
-        </ul>
+    //     </ul>
         
         
-        <hr />
+    //     <hr />
 
        
-        <Switch>
-          <Route exact path="/" component={Login}>
-          </Route>
-          <Route path="/register" component={Register}>
-          </Route>
-          <Route path="/addworkout" component={AddWorkout}>
-          </Route>
-          <Route path="/dashboard" component={Dashboard}>
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    //     <Switch>
+    //       <Route exact path="/" component={Login}>
+    //       </Route>
+    //       <Route path="/register" component={Register}>
+    //       </Route>
+    //       <Route path="/addworkout" component={AddWorkout}>
+    //       </Route>
+    //       <Route path="/dashboard" component={Dashboard}>
+    //       </Route>
+    //     </Switch>
+    //   </div>
+    // </Router>
   );
 }
 

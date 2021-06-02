@@ -28,6 +28,9 @@ const client = new MongoClient(url);
 // Promises
 function insertTodo(todo){
     return new Promise((resolve, reject)=>{
+
+        // var connection = client.connect();
+
         client.connect(function(err) {
             console.log('Connected successfully to server');
             const db = client.db(dbName);

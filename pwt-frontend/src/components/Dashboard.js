@@ -1,22 +1,72 @@
-import React, { useEffect } from 'react'
+import React, { useState,useEffect } from 'react'
+import { Table } from 'react-bootstrap'
+import {Link} from "react-router-dom";
 import authHeader from '../services/auth-header'
-function Dashboard() {
+
+export default function Dashboard() {
+
+    const [workouts, setWorkouts] = useState([]);
+    const [search, setSearch] = useState('');
+
+  
+
+      // replacement of ComponentDidMount
+  useEffect(() => {
+
+     fetch('http://localhost:8080/api/v1/workouts',{
+      headers: authHeader()
+     })
+         .then(res=>res.json())
+         .then(data=>{
+           console.log(data);
+           setWorkouts(data.data);
+         })
+   }, []);
 
 
-    useEffect(()=>{
-        console.log('Fetch all users call');
-        fetch('http://localhost:8080/api/v1/users',{
-            headers: authHeader()
-        })
-        .then(res=>res.json())
-        .then(data=>console.log(data));
+   const handleSearchChange = (event)=>{
+      console.log('title change')
+      
+      let filteredWorkouts = workouts.filter(workout => workout.title.startsWith(event.target.value))
+      setWorkouts(filteredWorkouts)
+      setSearch(event.target.value)
+   }
 
-    }, [])
+   if(workouts){
+    var workoutsList = workouts.map((workout,i)=>{
+      return (
+         <tr key={i}>
+           <td>{i+1}</td>
+           <td><Link to={'/operations/' + workout.title}>{workout.title}</Link></td>
+           <td>{workout.desc}</td>
+           <td>{workout.cbpm}</td>
+         </tr>
+      )
+  })
+   }
+   
 
     return (
-      <div>
-        <h2>Display all users</h2>
-      </div>
-    );
-  }
-export default Dashboard;
+
+      <>
+
+        <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Search By Title</span>
+        <input onChange={handleSearchChange} value={search} type="text" class="form-control" placeholder="Enter title" aria-label="Username" aria-describedby="basic-addon1"/>
+        </div>
+        <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Calories Burnt(per minute)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {workoutsList}
+        </tbody>
+      </Table>
+      </>
+    )
+}

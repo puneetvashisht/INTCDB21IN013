@@ -32,7 +32,8 @@ const UserSchema = new Schema({
 
 UserSchema.methods.generateToken = async function(){
     console.log('Generating token ***')
-    let token = await jwt.sign({id: this._id, role: this.role}, process.env.JSON_SECRET_KEY, { expiresIn: '1h' });
+    // let token = await jwt.sign({id: this._id, role: this.role}, process.env.JSON_SECRET_KEY, { expiresIn: '1h' });
+    let token = await jwt.sign({id: this._id, role: this.role}, process.env.JSON_SECRET_KEY);
     // console.log(token);
     return token;
 }
