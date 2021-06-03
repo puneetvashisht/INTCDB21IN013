@@ -8,11 +8,8 @@ export default function Dashboard() {
     const [workouts, setWorkouts] = useState([]);
     const [search, setSearch] = useState('');
 
-  
-
       // replacement of ComponentDidMount
   useEffect(() => {
-
      fetch('http://localhost:8080/api/v1/workouts',{
       headers: authHeader()
      })

@@ -10,6 +10,7 @@ import AddEmployee from './components/AddEmployee';
 import Clock from './components/Clock'
 import Dropdown from './components/Dropdown';
 import Parent from './components/Parent'
+import Increment from './components/Increment';
 
 export default class App extends Component {
 
@@ -19,21 +20,21 @@ export default class App extends Component {
   }
 
 
-  componentDidMount(){
-    console.log('initialization codde...');
-    fetch('http://localhost:3004/employees')
-    .then(res=>res.json())
-    .then(data=>
-      {
-        console.log(data);
-        this.setState({employees: data})
+  // componentDidMount(){
+  //   console.log('initialization codde...');
+  //   fetch('http://localhost:3004/employees')
+  //   .then(res=>res.json())
+  //   .then(data=>
+  //     {
+  //       console.log(data);
+  //       this.setState({employees: data})
 
-      });
+  //     });
 
 
-      // console.log('test')
+  //     // console.log('test')
 
-  }
+  // }
 
   render() {
 
@@ -47,7 +48,8 @@ export default class App extends Component {
     return (
       <div className="container">
        <div className="row">
-         <Parent></Parent>
+         <Increment></Increment>
+         {/* <Parent></Parent> */}
           {/* {employeeList} */}
 
           {/* <Clock></Clock> */}
