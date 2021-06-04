@@ -1,19 +1,21 @@
 import {useState} from 'react'
-export default function(){
+import {connect} from 'react-redux'
+function DisplayEmployee(props){
 
-    const[employees, setEmployees] = useState([
-        {id: 223, name: "Ravi", salary: 34343},
-        {id: 23, name: "Srab", salary: 44343}
-    ]);
-
-    let employeeList = employees.map((employee, i)=>{
+    let employeeList = props.employees.map((employee, i)=>{
         return <tr><td>{employee.name}</td></tr>
     })
-
     return (
         <table border="1"> 
            {employeeList}    
         </table>
-
     )
 }
+
+const mapStateToProps = (state) =>{
+    return {
+        employees: state.employees
+    }
+}
+
+export default connect(mapStateToProps)(DisplayEmployee)

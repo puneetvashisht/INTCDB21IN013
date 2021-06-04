@@ -20,6 +20,10 @@ const reducer = (state = initialState, action)=>{
         // right way -- immutable changes
         let newEmployees = [...state.employees, action.payload]
         return {employees: newEmployees}
+
+        case 'DELETE_EMPLOYEE':
+            let filteredEmployees = state.employees.filter(employee => employee.id != action.payload.id)
+            return {employees: filteredEmployees}
     }
 }
 

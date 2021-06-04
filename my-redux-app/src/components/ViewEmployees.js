@@ -1,28 +1,23 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
+import * as actions from '../actions/action'
 
-export default class ViewEmployees extends Component {
+class ViewEmployees extends Component {
 
-    constructor(){
-        super();
-        this.state = {employees: [
-            {id: 223, name: "Ravi", salary: 34343},
-            {id: 23, name: "Srab", salary: 44343}
-        ]}
-    }
-
-    deleteEmployees(){
-        this.setState({employees: []})
+    deleteEmployee(id){
+        // dispatch an action from here
+        this.props.onDeleteEmployee({id});
     }
 
     render() {
 
-        let employeeList = this.state.employees.map((employee, i)=>{
-            return (<li>{employee.name}</li>)
+        let employeeList = this.props.employees.map((employee, i)=>{
+            return (<li>{employee.name}  <button onClick={this.deleteEmployee.bind(this, employee.id)}> X </button></li>)
         })
 
         return (
             <div>
-                <button onClick={this.deleteEmployees.bind(this)}>Delete All Employees</button>
+               
                 <ul>
                     {employeeList}
                 </ul>
@@ -30,3 +25,22 @@ export default class ViewEmployees extends Component {
         )
     }
 }
+
+// export default ViewEmployees;
+
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        employees: state.employees
+    }
+
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onDeleteEmployee: (id)=> dispatch(actions.deleteEmployee(id))
+    }
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewEmployees)

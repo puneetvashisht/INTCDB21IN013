@@ -12,3 +12,11 @@
     Dispatch
         -> Dispatches actions to store, reaches reducer then 
         ->  The only way to update the state is to call store.dispatch() and pass in an action object.
+
+
+    Steps for : React application to use redux
+    1. npm i react-redux (bridge library b/w react and redux)
+    2. Store and reducers
+    3. Provide store to entire app by using <Provider> from 'react-redux'
+    4. Connect to store in components: connect(mapStateToProps)(Component)
+    5. Change component to display from props and not from state
