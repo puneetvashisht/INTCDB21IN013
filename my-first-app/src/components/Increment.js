@@ -1,18 +1,7 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
+import useCounter from '../hooks/counter-hook';
 
-export default function Increment(){
-    const [counter, setCounter] = useState(0)
-
-    useEffect(()=>{
-        console.log('Effect...', prevCounter)
-        setInterval(()=>{
-            setCounter(counter + 1);
-        },1000)
-    }, [])
-
-   
-
-    return (
-        <h2>Counter {counter}</h2>
-    )
-}
+export default function Increment() {
+    const counter = useCounter();
+    return <h2>{counter}</h2>;
+};

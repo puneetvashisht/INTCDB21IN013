@@ -11,6 +11,7 @@ import Clock from './components/Clock'
 import Dropdown from './components/Dropdown';
 import Parent from './components/Parent'
 import Increment from './components/Increment';
+import Decrement from './components/Decrement';
 
 export default class App extends Component {
 
@@ -49,6 +50,7 @@ export default class App extends Component {
       <div className="container">
        <div className="row">
          <Increment></Increment>
+         <Decrement></Decrement>
          {/* <Parent></Parent> */}
           {/* {employeeList} */}
 
