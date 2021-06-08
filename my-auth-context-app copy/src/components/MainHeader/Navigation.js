@@ -1,31 +1,32 @@
 import React from 'react';
 
 import classes from './Navigation.module.css';
-import { useAuth } from "../../context/auth";
+// import { useAuth } from "../../context/auth";
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux'
 
 
 const Navigation = (props) => {
 
-  const {isAuthenticated,setIsAuthenticated} = useAuth();
-  console.log('In navigation ', isAuthenticated)
+  // const {isAuthenticated,setIsAuthenticated} = useAuth();
+  // console.log('In navigation ', isAuthenticated)
 
   return (
     <nav className={classes.nav}>
       <ul>
-        {isAuthenticated && (
+        {props.auth.isLoggedIn && (
           <li>
             <Link to="/">Home</Link>
           </li>
         )}
-        {isAuthenticated && (
+        {props.auth.isLoggedIn && (
           <li>
             <Link to="/admin">Admin</Link>
           </li>
         )}
-        {isAuthenticated && (
+        {props.auth.isLoggedIn && (
           <li>
-            <button onClick={()=>setIsAuthenticated(false)}>Logout</button>
+            <button onClick={()=>props.onLogout(false)}>Logout</button>
           </li>
         )}
       </ul>
@@ -33,4 +34,16 @@ const Navigation = (props) => {
   );
 };
 
-export default Navigation;
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    onLogout: (login)=> dispatch({type: 'USER_AUTHENTICATE', payload: login})
+  }
+}
+
+const mapStateToProps = (state)=>{
+  return {
+    auth: state.auth
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (Navigation);

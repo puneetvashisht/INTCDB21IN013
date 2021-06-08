@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
-// import { useAuth } from "../../context/auth";
-import {connect} from 'react-redux'
+import { useAuth } from "../../context/auth";
 import {
   useHistory
 } from "react-router-dom";
 const Login = (props) => {
 
   let history = useHistory();
+  const {setIsAuthenticated} = useAuth();
 
 
   const [enteredEmail, setEnteredEmail] = useState('');
@@ -46,8 +46,7 @@ const Login = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     // props.onLogin(enteredEmail, enteredPassword);
-    // setIsAuthenticated(true);
-    props.onLogout(true)
+    setIsAuthenticated(true);
     history.push("/admin")
   };
 
@@ -92,19 +91,4 @@ const Login = (props) => {
   );
 };
 
-// export default Login;
-
-const mapDispatchToProps = (dispatch)=>{
-  return {
-    onLogout: (login)=> dispatch({type: 'USER_AUTHENTICATE', payload: login})
-  }
-}
-
-const mapStateToProps = (state)=>{
-  return {
-    auth: state.auth
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps) (Login);
-
+export default Login;
