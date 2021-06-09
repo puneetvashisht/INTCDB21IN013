@@ -3,10 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {applyMiddleware, createStore} from 'redux';
+import {Provider} from 'react-redux'
+import workoutReducer from './store/workout-reducer'
+import thunkMiddleware from 'redux-thunk'
+
+const loggerMiddleware = storeAPI => next => action => {
+  console.log('dispatching', action)
+  let result = next(action)
+  console.log('next state', storeAPI.getState())
+  return result
+}
+
+
+const myEnhancer = applyMiddleware(loggerMiddleware, thunkMiddleware)
+const appStore = createStore(workoutReducer, myEnhancer)
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={appStore}>
+     <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

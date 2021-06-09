@@ -9,8 +9,9 @@ const Workout = require('../models/workout')
 const advancedFind = require('../middleware/advancedFind');
 
 router.route('/')
-.get(protect, advancedFind(Workout),  fetchAllWorkouts)
-.post(protect, authorize('trainer', 'admin') ,addWorkouts)
+.get(advancedFind(Workout),  fetchAllWorkouts)
+// .post(protect, authorize('trainer', 'admin') ,addWorkouts)
+.post(addWorkouts)
 
 router.route('/start/:title')
 .patch(protect, authorize('user'), startWorkout)
