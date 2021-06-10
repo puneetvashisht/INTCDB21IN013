@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {applyMiddleware, createStore} from 'redux';
+import {applyMiddleware, combineReducers, createStore} from 'redux';
 import {Provider} from 'react-redux'
 import workoutReducer from './store/workout-reducer'
+import weightLogReducer from './store/weightlog-reducer'
+import authReducer from './store/auth-reducer'
 import thunkMiddleware from 'redux-thunk'
 
 const loggerMiddleware = storeAPI => next => action => {
@@ -17,7 +19,7 @@ const loggerMiddleware = storeAPI => next => action => {
 
 
 const myEnhancer = applyMiddleware(loggerMiddleware, thunkMiddleware)
-const appStore = createStore(workoutReducer, myEnhancer)
+const appStore = createStore(combineReducers({workoutReducer, weightLogReducer ,authReducer}) , myEnhancer)
 
 ReactDOM.render(
   <React.StrictMode>

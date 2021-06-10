@@ -5,7 +5,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
-
+import {connect} from 'react-redux';
+import * as actions from './actions/auth-actions'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavDropdown, FormControl, Form, Button } from 'react-bootstrap'
 
@@ -15,6 +16,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import AuthService from './services/auth'
 import WorkoutOperations from "./components/WorkoutOperations";
+import WeightLogView from "./components/WeightLogView";
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -25,17 +27,17 @@ import WorkoutOperations from "./components/WorkoutOperations";
 // making sure things like the back button and bookmarks
 // work properly.
 
-export default function BasicExample() {
+function App(props) {
 
 
-  const [authenticated, setAuthenticated] = useState(false);
+  // const [authenticated, setAuthenticated] = useState(false);
   const [showAdmin, setShowAdmin] = useState(false);
   // const [message, setMessage] = useState('');
 
   // initialization 
   useEffect(() => {
-    setAuthenticated(AuthService.isAuthenticated())
-    setShowAdmin(AuthService.isAdmin())
+    // setAuthenticated(AuthService.isAuthenticated())
+    // setShowAdmin(AuthService.isAdmin())
     console.log('Admin role: ', showAdmin)
 ;  }, [])
 
@@ -65,11 +67,12 @@ export default function BasicExample() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            {authenticated &&<Nav.Link href="#home"><Link to="/dashboard">Dashboard</Link></Nav.Link>}
-            {authenticated &&<Nav.Link href="#home"><a href="#" onClick={()=>AuthService.logout()}>Logout</a></Nav.Link>}
+            {props.authenticated &&<Nav.Link href="#home"><Link to="/dashboard">Dashboard</Link></Nav.Link>}
+            {props.authenticated &&<Nav.Link href="#home"><Link to="/weights">Weight View</Link></Nav.Link>}
+            {props.authenticated &&<Nav.Link href="#home"><a href="#" onClick={()=>props.onUserLogout()}>Logout</a></Nav.Link>}
             {showAdmin && <Nav.Link href="#link"><Link to="/addworkout">Add Workout</Link></Nav.Link>}
             
-            {!authenticated && 
+            {!props.authenticated && 
               <>
               <Nav.Link href="#link"><Link to="/">Login</Link></Nav.Link>
               <Nav.Link href="#link"><Link to="/register">Register</Link></Nav.Link>
@@ -95,6 +98,8 @@ export default function BasicExample() {
         <Route path="/addworkout" component={AddWorkout}>
         </Route>
         <Route path="/dashboard" component={Dashboard}>
+        </Route>
+        <Route path="/weights" component={WeightLogView}>
         </Route>
         <Route path="/operations/:title" component={WorkoutOperations}>
         </Route>
@@ -147,4 +152,19 @@ export default function BasicExample() {
 
 
 
+const mapStateToProps = (state) => {
+  console.log('Inside Component ', state);
+  return {
+    authenticated: state.authReducer.authenticated
+  }
+}
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onUserLogout: (user)=>dispatch(actions.login(false))
+  }
+}
+
+
+// export default ViewEmployee;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

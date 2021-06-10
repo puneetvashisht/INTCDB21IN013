@@ -9,6 +9,6 @@ const WeightLog = require('../models/weightlog');
 
 router.route('/')
 .get(advancedFind(WeightLog), fetchWeightLog)
-.post(protect, addWeightLog)
+.post( addWeightLog)
 
 module.exports = router
