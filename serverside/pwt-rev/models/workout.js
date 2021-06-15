@@ -21,9 +21,10 @@ const WorkoutSchema = new Schema({
        min: [10, 'Minimum cpbm is 10 cals'],
    },
    user: {
-     type: mongoose.Schema.Types.ObjectId,
-     ref: 'User',
-     required: true
+     type: Schema.Types.ObjectId,
+     ref: 'User'
+    //  ,
+    //  required: true
    },
    createdAt: {
        type: Date,

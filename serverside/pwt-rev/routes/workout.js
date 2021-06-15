@@ -9,7 +9,10 @@ const Workout = require('../models/workout')
 const advancedFind = require('../middleware/advancedFind');
 
 router.route('/')
-.get(advancedFind(Workout),  fetchAllWorkouts)
+.get(advancedFind(Workout,{
+    path: 'user',
+    select: 'name email'
+  }),  fetchAllWorkouts)
 // .post(protect, authorize('trainer', 'admin') ,addWorkouts)
 .post(addWorkouts)
 

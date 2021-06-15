@@ -4,6 +4,24 @@ const jwt = require('jsonwebtoken');
 
 
 const Schema = mongoose.Schema;
+
+
+const AddressSchema = new Schema({
+
+    houseNumber: {
+        type: Number,
+        required: [true, 'Please provide a houseNumber']
+    },
+    locality: {
+        type: String,
+        required: [true, 'Please provide a locality']
+    },
+    city: {
+        type: String,
+        required: [true, 'Please provide a city']
+    } 
+})
+
 const UserSchema = new Schema({
 
     name: {
@@ -27,7 +45,8 @@ const UserSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
+    addresses: [AddressSchema]
 });
 
 UserSchema.methods.generateToken = async function(){

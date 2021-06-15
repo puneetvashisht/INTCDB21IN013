@@ -5,7 +5,12 @@ const Workout = require('../models/workout')
 const asyncHandler = require('../middleware/async');
 // const workoutRepo = require('../repos/workout')
 
+
+
 const fetchAllWorkouts = asyncHandler(async(req,res, next) => {
+
+
+
 
     res.json(res.advancedResults);
     // try{
@@ -18,6 +23,8 @@ const fetchAllWorkouts = asyncHandler(async(req,res, next) => {
 })
 
 const addWorkouts = asyncHandler(async(req,res,next) => {
+
+
 
 
     // try{
