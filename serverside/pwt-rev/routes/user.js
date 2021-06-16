@@ -1,7 +1,7 @@
 const { compareSync } = require('bcrypt')
 var express = require('express')
 var router = express.Router()
-const {fetchAllUsers, registerUser, loginUser} = require('../controllers/user')
+const {fetchAllUsers, registerUser, loginUser, uploadProfilePic} = require('../controllers/user')
 const {protect} = require('../middleware/auth');
 const advancedFind = require('../middleware/advancedFind');
 
@@ -24,5 +24,8 @@ router.route('/')
 router.route('/login')
 .post(loginUser);
 
+
+router.route('/upload/:id')
+.put(uploadProfilePic);
 
 module.exports = router

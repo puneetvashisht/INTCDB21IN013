@@ -8,11 +8,15 @@ const weightLogRoutes = require('./routes/weightlog')
 const connectToDatabase = require('./db')
 const errorHandler = require('./middleware/errorhandler');
 const cors = require('cors');
+const fileupload = require('express-fileupload')
 
 connectToDatabase()
 
 app.use(express.json());
 app.use(cors());
+app.use(fileupload())
+
+app.use(express.static('public'))
 
 app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/workouts', workoutRoutes)

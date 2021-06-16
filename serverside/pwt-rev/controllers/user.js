@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const path = require('path')
 const asyncHandler = require('../middleware/async')
 
 // //Generic Method (Select, Sort, Limit)
@@ -97,4 +98,33 @@ const loginUser = asyncHandler(async(req, res)=>{
 
 })
 
-module.exports = {fetchAllUsers, registerUser, loginUser}
+
+const uploadProfilePic = asyncHandler(async(req, res, next)=>{
+   // find the user .. id;
+   let user = await User.findById(req.params.id);
+   if(!user) return next({status:404, message: 'User not found'})
+
+   if(!req.files) return next({status:404, message: 'Please upload file'})
+
+    // file instance
+   const file = req.files.file
+
+   console.log(file.name);
+   file.name = `pic_${user._id}${path.parse(file.name).ext}`
+
+   console.log(file.name);
+  
+   file.mv(`./public/uploads/${file.name}`, async(err)=>{
+        if (err) return next({status:500, message: 'Cant upload file'})
+
+        const result  = await User.findByIdAndUpdate(req.params.id, {photo: file.name});
+        res.json({success: true, data: file.name})
+   })
+
+    // mv to public/uploads
+
+    // update the user model with path
+
+})
+
+module.exports = {fetchAllUsers, registerUser, loginUser, uploadProfilePic}
