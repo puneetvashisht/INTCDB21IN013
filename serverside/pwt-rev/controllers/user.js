@@ -117,7 +117,7 @@ const uploadProfilePic = asyncHandler(async(req, res, next)=>{
    file.mv(`./public/uploads/${file.name}`, async(err)=>{
         if (err) return next({status:500, message: 'Cant upload file'})
 
-        const result  = await User.findByIdAndUpdate(req.params.id, {photo: file.name});
+        await User.findByIdAndUpdate(req.params.id, {photo: file.name});
         res.json({success: true, data: file.name})
    })
 

@@ -11,6 +11,12 @@ function Login(props){
     // const [message, setMessage] = useState('');
     const [password, setPassword] = useState('');
 
+
+    // if (props.authenticated) {
+    //     history.push('/dashboard')
+    // }
+
+
     const login = () => {
         console.log('registering a user');
         let user = {email, password}
@@ -39,16 +45,29 @@ function Login(props){
         setPassword(event.target.value);
     }
 
+    let authMessage = ''
+    if(props.authenticated){
+        authMessage = "Authenticated" 
+    }
+
     return(
         <>
         <h2>Login</h2>
-        {/* <h3>{message}</h3> */}
+        {/* <h2>Authenticate: {props.authenticated}</h2> */}
+        <h3>{authMessage}</h3>
         <input onChange={onEmailChange} value={email} type="email" placeholder="Enter email"/>
         <input onChange={onPasswordChange} value={password} type="password" placeholder="Enter password"/>
-        <button onClick = {login}>Login</button>
+        <button onClick = {login} data-testid="login-button">Login</button>
         </>
     );
 }
+
+const mapStateToProps = (state) => {
+    console.log('Inside Component ', state);
+    return {
+        authenticated: state.authReducer.authenticated
+    }
+  }
 
 
 const mapDispatchToProps = (dispatch) => {
@@ -57,4 +76,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -10,6 +10,7 @@ import * as actions from './actions/auth-actions'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavDropdown, FormControl, Form, Button } from 'react-bootstrap'
 
+import PrivateRoute from "./components/PrivateRoute";
 import AddWorkout from "./components/AddWorkout";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
@@ -95,8 +96,8 @@ function App(props) {
         </Route>
         <Route path="/register" component={Register}>
         </Route>
-        <Route path="/addworkout" component={AddWorkout}>
-        </Route>
+        <PrivateRoute path="/addworkout" component={AddWorkout}>
+        </PrivateRoute>
         <Route path="/dashboard" component={Dashboard}>
         </Route>
         <Route path="/weights" component={WeightLogView}>
